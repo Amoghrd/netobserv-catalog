@@ -10767,8 +10767,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:da93b73f11d23c3f1a26461ce1d73160019d9f49d4c5c8b658fba8d46ea04bac
-      createdAt: 2025-06-23T17:25:07
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:efe3802442f653dac258d5d4e1745466d63f307269b1fe6bb1ec79cc29fa1766
+      createdAt: 2025-06-26T08:50:45
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -11339,14 +11339,14 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:1151b5f638f23493889e64218b3f0c347acd82145df0a9ff581de03dafdb57d6
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:b29faabdf998926435fc39905e5afdba798415e3362387b637382411a4be2241
   name: console-plugin-compat
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:788bf81e21de7bf1b2f6a14e5677297e6687cf38b59eb48af5908c0e16000e77
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:4b99c077d1741ce47eec7c931e92c07a44550057d5fe784f6fc653d85d89a87e
   name: console-plugin
-- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:a47b976373101df4fe32683e2e224c012c608e7bf7ee166d1cc352e56b08e372
+- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:e64ac6a6311ec282e246e2346f1ddec4a536a228224bd0479e6323c907c6c6d7
   name: ebpf-agent
-- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:0de63442059bebdbd5dab92df93669f3a8f48b438acb0f7b2aeacaf290706daa
+- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:5f3864f0be498aa264a34a6e9f3adc603f9bb97b92b3b24d72bb356c107e4432
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:da93b73f11d23c3f1a26461ce1d73160019d9f49d4c5c8b658fba8d46ea04bac
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:efe3802442f653dac258d5d4e1745466d63f307269b1fe6bb1ec79cc29fa1766
   name: ""
 schema: olm.bundle
