@@ -18,6 +18,8 @@ generate: prereqs
 		opm alpha render-template basic -o yaml ./templates/$$i > ./auto-generated/legacy-catalog/$$i; \
 		sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/$$i; \
 		sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/$$i; \
+		sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/$$i; \
+		sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/$$i; \
 	done
 
 .PHONY: build-image

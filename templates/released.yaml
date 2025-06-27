@@ -79,5 +79,5 @@ entries:
     image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:0f0835291ec18f101d3f300dea94e2c56348e1c737dfb4fb14484cb0de1ddf6a
   - schema: olm.bundle          # 1.8.1
     image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:abf372f07ca49997f9298c73820542f001327680452f87f7d594e532f794dd23
-  - schema: olm.bundle          # main
-    image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
+  - schema: olm.bundle          # 1.9.0
+    image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream@sha256:93d985e77efe4a08982de1a832a54c47b8888a522e752d9a2ee42367097fd2af

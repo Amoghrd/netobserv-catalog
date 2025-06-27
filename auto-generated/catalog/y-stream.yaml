@@ -10309,7 +10309,7 @@ relatedImages:
   name: ""
 schema: olm.bundle
 ---
-image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
+image: registry.redhat.io/network-observability/network-observability-operator-bundle:latest
 name: network-observability-operator.v1.9.0
 package: netobserv-operator
 properties:
@@ -11337,7 +11337,7 @@ properties:
       name: Red Hat
       url: https://www.redhat.com
 relatedImages:
-- image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
+- image: registry.redhat.io/network-observability/network-observability-operator-bundle:latest
   name: ""
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:abaff721b5730cedac497a767d80882134ba5ee94c8b5a1813e05c25a1410e91
   name: console-plugin-compat
