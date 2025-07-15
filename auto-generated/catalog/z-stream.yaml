@@ -10309,7 +10309,7 @@ relatedImages:
   name: ""
 schema: olm.bundle
 ---
-image: registry.redhat.io/network-observability/network-observability-operator-bundle:latest
+image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream:latest
 name: network-observability-operator.v1.8.2
 package: netobserv-operator
 properties:
@@ -10768,7 +10768,7 @@ properties:
       categories: Monitoring, Networking
       console.openshift.io/plugins: '["netobserv-plugin"]'
       containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:36a5e445c3834a98c7ab01e84358f65c549060bd969c6dc8caa53e6cd1426419
-      createdAt: 2025-06-03T09:50:25
+      createdAt: 2025-07-03T08:14:57
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -11312,7 +11312,7 @@ properties:
       name: Red Hat
       url: https://www.redhat.com
 relatedImages:
-- image: registry.redhat.io/network-observability/network-observability-operator-bundle:latest
+- image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream:latest
   name: ""
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:06a13a6af7058b93ecaa6833af515a191f9195d4d810b5a04db60f76aabfe571
   name: console-plugin
