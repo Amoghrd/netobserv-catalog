@@ -706,11 +706,6 @@ properties:
   value:
     group: flows.netobserv.io
     kind: FlowCollector
-    version: v1beta1
-- type: olm.gvk
-  value:
-    group: flows.netobserv.io
-    kind: FlowCollector
     version: v1beta2
 - type: olm.gvk
   value:
@@ -783,188 +778,6 @@ properties:
               "metricName": "cluster_external_ingress_bytes_total",
               "type": "Counter",
               "valueField": "Bytes"
-            }
-          },
-          {
-            "apiVersion": "flows.netobserv.io/v1beta1",
-            "kind": "FlowCollector",
-            "metadata": {
-              "name": "cluster"
-            },
-            "spec": {
-              "agent": {
-                "ebpf": {
-                  "cacheActiveTimeout": "5s",
-                  "cacheMaxFlows": 100000,
-                  "excludeInterfaces": [
-                    "lo"
-                  ],
-                  "imagePullPolicy": "IfNotPresent",
-                  "interfaces": [],
-                  "kafkaBatchSize": 1048576,
-                  "logLevel": "info",
-                  "privileged": false,
-                  "resources": {
-                    "limits": {
-                      "memory": "800Mi"
-                    },
-                    "requests": {
-                      "cpu": "100m",
-                      "memory": "50Mi"
-                    }
-                  },
-                  "sampling": 50
-                },
-                "type": "EBPF"
-              },
-              "consolePlugin": {
-                "autoscaler": {
-                  "maxReplicas": 3,
-                  "metrics": [
-                    {
-                      "resource": {
-                        "name": "cpu",
-                        "target": {
-                          "averageUtilization": 50,
-                          "type": "Utilization"
-                        }
-                      },
-                      "type": "Resource"
-                    }
-                  ],
-                  "minReplicas": 1,
-                  "status": "DISABLED"
-                },
-                "enable": true,
-                "imagePullPolicy": "IfNotPresent",
-                "logLevel": "info",
-                "port": 9001,
-                "portNaming": {
-                  "enable": true,
-                  "portNames": {
-                    "3100": "loki"
-                  }
-                },
-                "quickFilters": [
-                  {
-                    "default": true,
-                    "filter": {
-                      "flow_layer": "app"
-                    },
-                    "name": "Applications"
-                  },
-                  {
-                    "filter": {
-                      "flow_layer": "infra"
-                    },
-                    "name": "Infrastructure"
-                  },
-                  {
-                    "default": true,
-                    "filter": {
-                      "dst_kind": "Pod",
-                      "src_kind": "Pod"
-                    },
-                    "name": "Pods network"
-                  },
-                  {
-                    "filter": {
-                      "dst_kind": "Service"
-                    },
-                    "name": "Services network"
-                  }
-                ],
-                "register": true
-              },
-              "deploymentModel": "DIRECT",
-              "exporters": [],
-              "kafka": {
-                "address": "kafka-cluster-kafka-bootstrap.netobserv",
-                "tls": {
-                  "caCert": {
-                    "certFile": "ca.crt",
-                    "name": "kafka-cluster-cluster-ca-cert",
-                    "type": "secret"
-                  },
-                  "enable": false,
-                  "userCert": {
-                    "certFile": "user.crt",
-                    "certKey": "user.key",
-                    "name": "flp-kafka",
-                    "type": "secret"
-                  }
-                },
-                "topic": "network-flows"
-              },
-              "loki": {
-                "batchSize": 10485760,
-                "batchWait": "1s",
-                "enable": true,
-                "maxBackoff": "5s",
-                "maxRetries": 2,
-                "minBackoff": "1s",
-                "statusTls": {
-                  "caCert": {
-                    "certFile": "service-ca.crt",
-                    "name": "loki-ca-bundle",
-                    "type": "configmap"
-                  },
-                  "enable": false,
-                  "insecureSkipVerify": false,
-                  "userCert": {
-                    "certFile": "tls.crt",
-                    "certKey": "tls.key",
-                    "name": "loki-query-frontend-http",
-                    "type": "secret"
-                  }
-                },
-                "tls": {
-                  "caCert": {
-                    "certFile": "service-ca.crt",
-                    "name": "loki-gateway-ca-bundle",
-                    "type": "configmap"
-                  },
-                  "enable": false,
-                  "insecureSkipVerify": false
-                },
-                "url": "http://loki.netobserv.svc:3100/"
-              },
-              "namespace": "netobserv",
-              "processor": {
-                "conversationEndTimeout": "10s",
-                "conversationHeartbeatInterval": "30s",
-                "conversationTerminatingTimeout": "5s",
-                "dropUnusedFields": true,
-                "imagePullPolicy": "IfNotPresent",
-                "kafkaConsumerAutoscaler": null,
-                "kafkaConsumerBatchSize": 10485760,
-                "kafkaConsumerQueueCapacity": 1000,
-                "kafkaConsumerReplicas": 3,
-                "logLevel": "info",
-                "logTypes": "FLOWS",
-                "metrics": {
-                  "disableAlerts": [],
-                  "includeList": [
-                    "node_ingress_bytes_total",
-                    "workload_ingress_bytes_total",
-                    "namespace_flows_total"
-                  ],
-                  "server": {
-                    "port": 9102
-                  }
-                },
-                "port": 2055,
-                "profilePort": 6060,
-                "resources": {
-                  "limits": {
-                    "memory": "800Mi"
-                  },
-                  "requests": {
-                    "cpu": "100m",
-                    "memory": "100Mi"
-                  }
-                }
-              }
             }
           },
           {
@@ -1156,8 +969,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:7282000714656be8316fb498a5de08a8e604d71513a92107a4d39ad5b8aea1aa
-      createdAt: 2025-07-17T11:31:25
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:8871d6289aaf02caa9dbfce9e5029fb1ad9a642df61d6bfdd55aa5050b56ba66
+      createdAt: 2025-07-28T09:09:24
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -1182,12 +995,6 @@ properties:
     apiServiceDefinitions: {}
     crdDescriptions:
       owned:
-      - description: '`FlowCollector` is the schema for the network flows collection
-          API, which pilots and configures the underlying deployments.'
-        displayName: Flow Collector
-        kind: FlowCollector
-        name: flowcollectors.flows.netobserv.io
-        version: v1beta1
       - description: '`FlowCollector` is the schema for the network flows collection
           API, which pilots and configures the underlying deployments.'
         displayName: Flow Collector
@@ -1728,15 +1535,15 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:d71dbf231ae2f22cc5a6035ee5573ee558470acddc009743f90edb89bc8f7152
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:f38714dd4a1ad45a0c83965f4da15b776523ae6707a2833abdbeee5de60cf25c
   name: console-plugin-compat
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:4b22ca9690a543d29de8a74f075716af5ac83130a28597a000f195afe03aa2d5
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:b6988ba407ed4de47386e2aa6a6f28e990e9ee3bf1253660130428ef1a64b26a
   name: console-plugin
-- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:810786811c4194a3705500bfb07fdd0a0c219662f1719a482200cde9c62928f1
+- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:72b01adc65269ddbf5db732d550bc2ae7acc248561c81166c2989bcbf079df62
   name: ebpf-agent
-- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:b85df61e95758146a9b04390dcd3b629715ed07a83d19c9338301018cdc88ae5
+- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:c49e5dbcafa10e45dc0443fce285020ee0e2c496dccb908a29f846995c3ccb49
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:7282000714656be8316fb498a5de08a8e604d71513a92107a4d39ad5b8aea1aa
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:8871d6289aaf02caa9dbfce9e5029fb1ad9a642df61d6bfdd55aa5050b56ba66
   name: ""
 schema: olm.bundle
 ---
