@@ -75,3 +75,11 @@ deploy: ## Deploy the catalog image on a cluster
 .PHONY: undeploy
 undeploy: ## Undeploy the catalog image from a cluster
 	kubectl delete -f ./catalog-source.yaml
+
+deploy-zstream: IMAGE=quay.io/redhat-user-workloads/ocp-network-observab-tenant/catalog-zstream:latest
+deploy-zstream: deploy
+	@echo "Before installing the operator, remember to install an ImageDigestMirrorSet too"
+
+deploy-ystream: IMAGE=quay.io/redhat-user-workloads/ocp-network-observab-tenant/catalog-ystream:latest
+deploy-ystream: deploy
+	@echo "Before installing the operator, remember to install an ImageDigestMirrorSet too"
