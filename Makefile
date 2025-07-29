@@ -31,32 +31,57 @@ prereqs: ## Prerequisites: installs opm and yq
 
 .PHONY: generate
 generate: prereqs ## Regenerate all catalogs from scratch
-	rm -f ./auto-generated/catalog/*
-	rm -f ./auto-generated/legacy-catalog/*
-	for i in $(shell ls ./templates/ | grep yaml); do \
-		opm alpha render-template basic --migrate-level=bundle-object-to-csv-metadata  -o yaml ./templates/$$i > ./auto-generated/catalog/$$i; \
-		opm alpha render-template basic -o yaml ./templates/$$i > ./auto-generated/legacy-catalog/$$i; \
+	@for i in $(shell ls ./templates/ | grep yaml); do \
+		if [[ "$(SKIP)" == *"$$i"* ]]; then \
+		  echo "Skipping $$i" ; \
+		else \
+			echo "Generating $$i..." ; \
+			opm alpha render-template basic --migrate-level=bundle-object-to-csv-metadata  -o yaml ./templates/$$i > ./auto-generated/catalog/$$i; \
+			echo "Generating legacy $$i..." ; \
+			opm alpha render-template basic -o yaml ./templates/$$i > ./auto-generated/legacy-catalog/$$i; \
+			if [[ "$$i" == "released.yaml" ]]; then \
+				echo "Sedding $$i" ; \
+				sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/released.yaml ; \
+				sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/released.yaml ; \
+				sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/released.yaml ; \
+				sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/released.yaml ; \
+			fi \
+		fi \
 	done
-	sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/released.yaml; \
-	sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/released.yaml; \
-	sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/released.yaml; \
-	sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/released.yaml; \
 
 .PHONY: next-ystream
 next-ystream: ## Set current release to ystream next
+ifeq (,${BUNDLE_SHA})
+	@echo "You must provide the final bundle SHA in BUNDLE_SHA. Check last snapshot in https://konflux-ui.apps.stone-prd-rh01.pg1f.p1.openshiftapps.com/ns/ocp-network-observab-tenant/applications/netobserv-ystream/releases."
+else
 	cp ./templates/y-stream.Dockerfile-args ./templates/next-release.Dockerfile-args
 	cp ./templates/y-stream.yaml ./templates/released.yaml
-	cp ./auto-generated/catalog/y-stream.yaml ./auto-generated/catalog/released.yaml
-	cp ./auto-generated/legacy-catalog/y-stream.yaml ./auto-generated/legacy-catalog/released.yaml
+	sed -i 's/bundle-ystream:latest/bundle-ystream@sha256:$(BUNDLE_SHA)/' ./templates/released.yaml
 	sed -i 's/zstream/ystream/' .tekton/images-mirror-set.yaml
+	SKIP="y-stream.yaml,z-stream.yaml" $(MAKE) generate
+endif
 
 .PHONY: next-zstream
 next-zstream: ## Set current release to zstream next
+ifeq (,${BUNDLE_SHA})
+	@echo "You must provide the final bundle SHA in BUNDLE_SHA. Check last snapshot in https://konflux-ui.apps.stone-prd-rh01.pg1f.p1.openshiftapps.com/ns/ocp-network-observab-tenant/applications/netobserv-zstream/releases."
+else
 	cp ./templates/z-stream.Dockerfile-args ./templates/next-release.Dockerfile-args
 	cp ./templates/z-stream.yaml ./templates/released.yaml
-	cp ./auto-generated/catalog/z-stream.yaml ./auto-generated/catalog/released.yaml
-	cp ./auto-generated/legacy-catalog/z-stream.yaml ./auto-generated/legacy-catalog/released.yaml
+	sed -i 's/bundle-zstream:latest/bundle-zstream@sha256:$(BUNDLE_SHA)/' ./templates/released.yaml
 	sed -i 's/ystream/zstream/' .tekton/images-mirror-set.yaml
+	SKIP="y-stream.yaml,z-stream.yaml" $(MAKE) generate
+endif
+
+.PHONY: release-final-step
+release-final-step: ## Final step for release setup: update the released template with final bundle image
+ifeq ($(shell cat templates/next-release.Dockerfile-args), $(shell cat templates/z-stream.Dockerfile-args))
+	@echo "Final setup for z-stream release"
+else ifeq ($(shell cat templates/next-release.Dockerfile-args), $(shell cat templates/y-stream.Dockerfile-args))
+	@echo "Final setup for y-stream release"
+else
+	@echo "Could not find stream to release, please check content of Dockerfile-args files"
+endif
 
 ##@ Testing
 
