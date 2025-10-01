@@ -936,7 +936,7 @@ properties:
               "namespace": "netobserv",
               "networkPolicy": {
                 "additionalNamespaces": [],
-                "enable": false
+                "enable": true
               },
               "processor": {
                 "imagePullPolicy": "IfNotPresent",
@@ -975,8 +975,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:5a26ef09ad104772f388128350acb1b9a2bf71c5a7e68ee9f8815373c626b4a7
-      createdAt: 2025-09-11T13:27:08
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:f44fdb83a2a0cf3c228e7d47a52f0261fa0df9463b804607b591634ec97a464a
+      createdAt: 2025-10-01T05:51:50
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -1343,6 +1343,8 @@ properties:
           path: processor.filters
         - displayName: Log types
           path: processor.logTypes
+        - displayName: Alerts
+          path: processor.metrics.alerts
         - displayName: Disable alerts
           path: processor.metrics.disableAlerts
         - displayName: Include list
@@ -1465,7 +1467,7 @@ properties:
       | *Worker Node vCPU and memory*                   | 4 vCPUs\| 16GiB mem *  | 16 vCPUs\| 64GiB mem * | 16 vCPUs\| 64GiB mem  * |16 vCPUs\| 64GiB Mem *         |
       | *LokiStack size*                                | `1x.extra-small`       | `1x.small`             | `1x.small`              | `1x.medium`                   |
       | *Network Observability controller memory limit* | 400Mi (default)        | 400Mi (default)        | 400Mi (default)         | 800Mi                         |
-      | *eBPF sampling rate*                            | 50 (default)           | 50 (default)           | 50 (default)            | 50 (default)                  |
+      | *eBPF sampling interval*                        | 50 (default)           | 50 (default)           | 50 (default)            | 50 (default)                  |
       | *eBPF memory limit*                             | 800Mi (default)        | 800Mi (default)        | 2000Mi                  | 800Mi (default)               |
       | *FLP memory limit*                              | 800Mi (default)        | 800Mi (default)        | 800Mi (default)         | 800Mi (default)               |
       | *FLP Kafka partitions*                          | N/A                    | 48                     | 48                      | 48                            |
@@ -1541,15 +1543,15 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:7747360a4864eb668ade7079e53a8b86cede0de916760f8c3c1d83c80b3820f7
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:ff1204106dc42c6b58642dc3d5e027e0a3e481bd14e5804d56f812595d409f16
   name: console-plugin-compat
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:a67ceb90d11ee423d0e8cbc19efef4aa4c14f2597e5fa4b41fe7531c4b4939c8
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:8f74f4964451e6ae87d758f9056d7164d219f9e822f0c67b1dd01b5cf1934dd0
   name: console-plugin
-- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:aa3a9f6765bbd5779449a05858c2b10a29f23d4af0d25492f75b961738782f8a
+- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:dd0e8f78ddb065da0ac3aa77fea246f33423646c4244ec762a01c91d67fc9581
   name: ebpf-agent
-- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:e66d7edf7cc7c40e8472a0143fdd8acac9f04c306bf26ab1537d3810fd2b16f0
+- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:b55473668609b74377263ef1548b67167c6a1dfa7e0d0b298215f801d140d152
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:5a26ef09ad104772f388128350acb1b9a2bf71c5a7e68ee9f8815373c626b4a7
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:f44fdb83a2a0cf3c228e7d47a52f0261fa0df9463b804607b591634ec97a464a
   name: ""
 schema: olm.bundle
 ---

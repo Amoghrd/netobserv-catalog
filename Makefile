@@ -49,8 +49,16 @@ generate: prereqs ## Regenerate all catalogs from scratch
 		fi \
 	done
 
-.PHONY: next-ystream
-next-ystream: ## Set current release to ystream next
+.PHONY: gen-ystream
+gen-ystream: SKIP=released.yaml,z-stream.yaml
+gen-ystream: generate ## Generate only ystream
+
+.PHONY: gen-zstream
+gen-zstream: SKIP=released.yaml,z-stream.yaml
+gen-zstream: generate ## Generate only ystream
+
+.PHONY: final-ystream
+final-ystream: ## Accept current ystream as final release
 ifeq (,${BUNDLE_SHA})
 	@echo "You must provide the final bundle SHA in BUNDLE_SHA. Check last snapshot in https://konflux-ui.apps.stone-prd-rh01.pg1f.p1.openshiftapps.com/ns/ocp-network-observab-tenant/applications/netobserv-ystream/releases."
 else
@@ -61,8 +69,8 @@ else
 	SKIP="y-stream.yaml,z-stream.yaml" $(MAKE) generate
 endif
 
-.PHONY: next-zstream
-next-zstream: ## Set current release to zstream next
+.PHONY: final-zstream
+final-zstream: ## Accept current zstream as final release
 ifeq (,${BUNDLE_SHA})
 	@echo "You must provide the final bundle SHA in BUNDLE_SHA. Check last snapshot in https://konflux-ui.apps.stone-prd-rh01.pg1f.p1.openshiftapps.com/ns/ocp-network-observab-tenant/applications/netobserv-zstream/releases."
 else
