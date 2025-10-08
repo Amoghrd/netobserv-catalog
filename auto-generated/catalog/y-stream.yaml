@@ -975,8 +975,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:00dda1877bc1b5577e721fdc9761d643c73a960526ae360cdfc4cf788a3e5c94
-      createdAt: 2025-10-06T08:25:10
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:925f650c692787cfee7ffc342f99122899b88fe4d1bc32c722883c4edccae794
+      createdAt: 2025-10-08T06:39:31
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -1551,7 +1551,7 @@ relatedImages:
   name: ebpf-agent
 - image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:d1508d1b15fbf485c9e4d4f8ecacc0b20078b53ca6e17226c8355ae19ec3b9b3
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:00dda1877bc1b5577e721fdc9761d643c73a960526ae360cdfc4cf788a3e5c94
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:925f650c692787cfee7ffc342f99122899b88fe4d1bc32c722883c4edccae794
   name: ""
 schema: olm.bundle
 ---
