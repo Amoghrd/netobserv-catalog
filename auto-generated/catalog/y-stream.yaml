@@ -976,7 +976,7 @@ properties:
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
       containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:927d7fbcced425325b4f6e7c9493cb12bf14221b649c110bb4d0cd2db68361a7
-      createdAt: 2025-10-15T15:29:58
+      createdAt: 2025-10-27T10:18:17
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -1543,7 +1543,7 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:3fa32d18f5b4cb691dc792346fa417fae4389a4b2d479c397608484d335eaa21
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:5099e9ff5be03024b69df0b84316f4eddcd861c4859af8810a66888fd0d56a1a
   name: console-plugin-compat
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:5d52b602df1e406bd8eaf26f03b2531a772bd74ddd4141f12867d919693658ab
   name: console-plugin
