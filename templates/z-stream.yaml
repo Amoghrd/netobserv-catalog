@@ -46,8 +46,10 @@ entries:
         replaces: network-observability-operator.v1.9.1
       - name: network-observability-operator.v1.9.3
         replaces: network-observability-operator.v1.9.2
-      - name: network-observability-operator.v1.9.4
+      - name: network-observability-operator.v1.10.0
         replaces: network-observability-operator.v1.9.3
+      - name: network-observability-operator.v1.10.1
+        replaces: network-observability-operator.v1.10.0
   - schema: olm.channel
     package: netobserv-operator
     name: v1.0.x
@@ -95,5 +97,7 @@ entries:
     image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:35e361b7f4bec4c35cf17a8745ce2de707bcd86505c1626e3b155c02191c9a00
   - schema: olm.bundle          # 1.9.3
     image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:bf79fd57e1df791fcd45dd4745c923046dd7759ff5b3762cd7a329c5bf611316
-  - schema: olm.bundle          # 1.9.4
+  - schema: olm.bundle          # 1.10.0
+    image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:adf846c120930cb482e6a27af5a8c2c615d58096cd4c431a08a57afc279092fe
+  - schema: olm.bundle          # 1.10.1
     image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream:latest
