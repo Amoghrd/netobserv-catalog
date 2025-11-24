@@ -1828,8 +1828,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:6ed5e9babb5d16160d63cab249b6c866511a3ed56eabf19f451229de19924af7
-      createdAt: 2025-11-03T14:02:51
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:184f247b3734d3c3f79b1c0de6b8a76f104dc975df0e7d6e9a4f3bb5de7b86af
+      createdAt: 2025-11-24T07:52:27
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -2148,6 +2148,8 @@ properties:
           path: consolePlugin.portNaming.enable
         - displayName: Port names
           path: consolePlugin.portNaming.portNames
+        - displayName: Unmanaged replicas
+          path: consolePlugin.unmanagedReplicas
         - displayName: Address
           path: kafka.address
         - displayName: Topic
@@ -2186,6 +2188,8 @@ properties:
           path: networkPolicy.additionalNamespaces
         - displayName: Enable
           path: networkPolicy.enable
+        - displayName: Consumer replicas
+          path: processor.consumerReplicas
         - displayName: Deduper
           path: processor.deduper
         - displayName: Mode
@@ -2208,6 +2212,8 @@ properties:
           path: processor.subnetLabels
         - displayName: Custom labels
           path: processor.subnetLabels.customLabels
+        - displayName: Unmanaged replicas
+          path: processor.unmanagedReplicas
         - displayName: Prometheus
           path: prometheus
         - displayName: Querier
@@ -2285,7 +2291,7 @@ properties:
 
       ## Configuration
 
-      The `FlowCollector` resource is used to configure the operator and its managed components. A comprehensive documentation is [available here](https://github.com/netobserv/network-observability-operator/blob/1.9.2-community/docs/FlowCollector.md), and a full sample file [there](https://github.com/netobserv/network-observability-operator/blob/1.9.2-community/config/samples/flows_v1beta2_flowcollector.yaml).
+      The `FlowCollector` resource is used to configure the operator and its managed components. A comprehensive documentation is [available here](https://github.com/netobserv/network-observability-operator/blob/1.10.0-community/docs/FlowCollector.md), and a full sample file [there](https://github.com/netobserv/network-observability-operator/blob/1.10.0-community/config/samples/flows_v1beta2_flowcollector.yaml).
 
       To edit configuration in cluster, run:
 
@@ -2301,9 +2307,9 @@ properties:
 
       - Loki (`spec.loki`): configure here how to reach Loki. The default values match the Loki quick install paths mentioned above, but you might have to configure differently if you used another installation method. Make sure to disable it (`spec.loki.enable`) if you don't want to use Loki.
 
-      - Quick filters (`spec.consolePlugin.quickFilters`): configure preset filters to be displayed in the Console plugin. They offer a way to quickly switch from filters to others, such as showing / hiding pods network, or infrastructure network, or application network, etc. They can be tuned to reflect the different workloads running on your cluster. For a list of available filters, [check this page](https://github.com/netobserv/network-observability-operator/blob/1.9.2-community/docs/QuickFilters.md).
+      - Quick filters (`spec.consolePlugin.quickFilters`): configure preset filters to be displayed in the Console plugin. They offer a way to quickly switch from filters to others, such as showing / hiding pods network, or infrastructure network, or application network, etc. They can be tuned to reflect the different workloads running on your cluster. For a list of available filters, [check this page](https://github.com/netobserv/network-observability-operator/blob/1.10.0-community/docs/QuickFilters.md).
 
-      - Kafka (`spec.deploymentModel: KAFKA` and `spec.kafka`): when enabled, integrates the flow collection pipeline with Kafka, by splitting ingestion from transformation (kube enrichment, derived metrics, ...). Kafka can provide better scalability, resiliency and high availability ([view more details](https://www.redhat.com/en/topics/integration/what-is-apache-kafka)). Assumes Kafka is already deployed and a topic is created.
+      - Kafka (`spec.deploymentModel: Kafka` and `spec.kafka`): when enabled, integrates the flow collection pipeline with Kafka, by splitting ingestion from transformation (kube enrichment, derived metrics, ...). Kafka can provide better scalability, resiliency and high availability ([view more details](https://www.redhat.com/en/topics/integration/what-is-apache-kafka)). Assumes Kafka is already deployed and a topic is created.
 
       - Exporters (`spec.exporters`) an optional list of exporters to which to send enriched flows. KAFKA and IPFIX exporters are supported. This allows you to define any custom storage or processing that can read from Kafka or use the IPFIX standard.
 
@@ -2337,7 +2343,7 @@ properties:
       This documentation includes:
 
       - An [overview](https://github.com/netobserv/network-observability-operator#openshift-console) of the features, with screenshots
-      - More information on [configuring metrics](https://github.com/netobserv/network-observability-operator/blob/1.9.2-community/docs/Metrics.md).
+      - More information on [configuring metrics](https://github.com/netobserv/network-observability-operator/blob/1.10.0-community/docs/Metrics.md).
       - A [performance](https://github.com/netobserv/network-observability-operator#performance-fine-tuning) section, for fine-tuning
       - A [security](https://github.com/netobserv/network-observability-operator#securing-data-and-communications) section
       - An [F.A.Q.](https://github.com/netobserv/network-observability-operator#faq--troubleshooting) section
@@ -2404,7 +2410,7 @@ relatedImages:
   name: ebpf-agent
 - image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:e3027a51cf804b4a0e54f38f07b2e061081fcb47c1f5f8061df9ebf822170873
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:6ed5e9babb5d16160d63cab249b6c866511a3ed56eabf19f451229de19924af7
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:184f247b3734d3c3f79b1c0de6b8a76f104dc975df0e7d6e9a4f3bb5de7b86af
   name: ""
 schema: olm.bundle
 ---

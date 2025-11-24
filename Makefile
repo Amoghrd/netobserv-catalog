@@ -54,8 +54,8 @@ gen-ystream: SKIP=released.yaml,z-stream.yaml
 gen-ystream: generate ## Generate only ystream
 
 .PHONY: gen-zstream
-gen-zstream: SKIP=released.yaml,z-stream.yaml
-gen-zstream: generate ## Generate only ystream
+gen-zstream: SKIP=released.yaml,y-stream.yaml
+gen-zstream: generate ## Generate only zstream
 
 .PHONY: final-ystream
 final-ystream: ## Accept current ystream as final release
