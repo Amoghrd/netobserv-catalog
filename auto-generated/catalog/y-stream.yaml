@@ -2478,116 +2478,17 @@ properties:
                   "excludeInterfaces": [
                     "lo"
                   ],
-                  "imagePullPolicy": "IfNotPresent",
                   "interfaces": [],
-                  "kafkaBatchSize": 1048576,
-                  "logLevel": "info",
-                  "metrics": {
-                    "server": {
-                      "port": 9400
-                    }
-                  },
                   "privileged": false,
-                  "resources": {
-                    "limits": {
-                      "memory": "800Mi"
-                    },
-                    "requests": {
-                      "cpu": "100m",
-                      "memory": "50Mi"
-                    }
-                  },
                   "sampling": 50
                 },
                 "type": "eBPF"
               },
               "consolePlugin": {
-                "autoscaler": {
-                  "maxReplicas": 3,
-                  "metrics": [
-                    {
-                      "resource": {
-                        "name": "cpu",
-                        "target": {
-                          "averageUtilization": 50,
-                          "type": "Utilization"
-                        }
-                      },
-                      "type": "Resource"
-                    }
-                  ],
-                  "minReplicas": 1,
-                  "status": "Disabled"
-                },
-                "enable": true,
-                "imagePullPolicy": "IfNotPresent",
-                "logLevel": "info",
-                "portNaming": {
-                  "enable": true,
-                  "portNames": {
-                    "3100": "loki"
-                  }
-                },
-                "quickFilters": [
-                  {
-                    "default": true,
-                    "filter": {
-                      "flow_layer": "\"app\""
-                    },
-                    "name": "Applications"
-                  },
-                  {
-                    "filter": {
-                      "flow_layer": "\"infra\""
-                    },
-                    "name": "Infrastructure"
-                  },
-                  {
-                    "default": true,
-                    "filter": {
-                      "dst_kind": "\"Pod\"",
-                      "src_kind": "\"Pod\""
-                    },
-                    "name": "Pods network"
-                  },
-                  {
-                    "filter": {
-                      "dst_kind": "\"Service\""
-                    },
-                    "name": "Services network"
-                  }
-                ],
-                "replicas": 1,
-                "resources": {
-                  "limits": {
-                    "memory": "100Mi"
-                  },
-                  "requests": {
-                    "cpu": "100m",
-                    "memory": "50Mi"
-                  }
-                }
+                "enable": true
               },
               "deploymentModel": "Service",
               "exporters": [],
-              "kafka": {
-                "address": "kafka-cluster-kafka-bootstrap.netobserv",
-                "tls": {
-                  "caCert": {
-                    "certFile": "ca.crt",
-                    "name": "kafka-cluster-cluster-ca-cert",
-                    "type": "secret"
-                  },
-                  "enable": false,
-                  "userCert": {
-                    "certFile": "user.crt",
-                    "certKey": "user.key",
-                    "name": "flp-kafka",
-                    "type": "secret"
-                  }
-                },
-                "topic": "network-flows"
-              },
               "loki": {
                 "enable": true,
                 "lokiStack": {
@@ -2595,21 +2496,8 @@ properties:
                 },
                 "mode": "Monolithic",
                 "monolithic": {
-                  "tenantID": "netobserv",
-                  "tls": {
-                    "caCert": {
-                      "certFile": "service-ca.crt",
-                      "name": "loki-gateway-ca-bundle",
-                      "type": "configmap"
-                    },
-                    "enable": false
-                  },
                   "url": "http://loki.netobserv.svc.cluster.local.:3100/"
-                },
-                "readTimeout": "30s",
-                "writeBatchSize": 10485760,
-                "writeBatchWait": "1s",
-                "writeTimeout": "10s"
+                }
               },
               "namespace": "netobserv",
               "networkPolicy": {
@@ -2617,41 +2505,12 @@ properties:
                 "enable": true
               },
               "processor": {
-                "imagePullPolicy": "IfNotPresent",
-                "kafkaConsumerAutoscaler": null,
-                "kafkaConsumerBatchSize": 10485760,
-                "kafkaConsumerQueueCapacity": 1000,
-                "kafkaConsumerReplicas": 3,
-                "logLevel": "info",
-                "logTypes": "Flows",
+                "consumerReplicas": 3,
                 "metrics": {
-                  "disableAlerts": [],
-                  "server": {
-                    "port": 9401
-                  }
-                },
-                "resources": {
-                  "limits": {
-                    "memory": "800Mi"
-                  },
-                  "requests": {
-                    "cpu": "100m",
-                    "memory": "100Mi"
-                  }
+                  "disableAlerts": []
                 },
                 "slicesConfig": {
-                  "collectionMode": "AllowList",
-                  "enable": false,
-                  "namespacesAllowList": [
-                    "/openshift-.*|netobserv.*/"
-                  ]
-                }
-              },
-              "prometheus": {
-                "querier": {
-                  "enable": true,
-                  "mode": "Auto",
-                  "timeout": "30s"
+                  "enable": false
                 }
               }
             }
@@ -2660,8 +2519,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:fe153050ec689661d7533064733c46bfcd4f3437aa5424fb8f1debe647ca37d0
-      createdAt: 2026-01-05T14:57:14
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:0be427f3936ef60341109aa8842aee85db1b58e32e2c5e350a7b71f3653e8a77
+      createdAt: 2026-01-29T12:23:29
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -2679,7 +2538,7 @@ properties:
       operatorframework.io/suggested-namespace: openshift-netobserv-operator
       operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine",
         "OpenShift Container Platform", "OpenShift Platform Plus"]'
-      operators.operatorframework.io/builder: operator-sdk-v1.40.0
+      operators.operatorframework.io/builder: operator-sdk-v1.42.0
       operators.operatorframework.io/project_layout: go.kubebuilder.io/v4
       repository: https://github.com/netobserv/network-observability-operator
       support: NetObserv team
@@ -2980,6 +2839,8 @@ properties:
           path: consolePlugin.portNaming.enable
         - displayName: Port names
           path: consolePlugin.portNaming.portNames
+        - displayName: Standalone
+          path: consolePlugin.standalone
         - displayName: Unmanaged replicas
           path: consolePlugin.unmanagedReplicas
         - displayName: Address
@@ -3006,6 +2867,8 @@ properties:
           path: loki.microservices.querierUrl
         - displayName: Tenant id
           path: loki.microservices.tenantID
+        - displayName: Install demo loki
+          path: loki.monolithic.installDemoLoki
         - displayName: Tenant id
           path: loki.monolithic.tenantID
         - displayName: Url
@@ -3032,10 +2895,10 @@ properties:
           path: processor.filters
         - displayName: Log types
           path: processor.logTypes
-        - displayName: Alerts
-          path: processor.metrics.alerts
         - displayName: Disable alerts
           path: processor.metrics.disableAlerts
+        - displayName: Health rules
+          path: processor.metrics.healthRules
         - displayName: Include list
           path: processor.metrics.includeList
         - displayName: Port
@@ -3062,6 +2925,10 @@ properties:
           path: prometheus.querier.enable
         - displayName: Manual
           path: prometheus.querier.manual
+        - displayName: Alert manager
+          path: prometheus.querier.manual.alertManager
+        - displayName: Url
+          path: prometheus.querier.manual.alertManager.url
         - displayName: Forward user token
           path: prometheus.querier.manual.forwardUserToken
         - displayName: Url
@@ -3137,7 +3004,7 @@ properties:
 
       ## Configuration
 
-      The `FlowCollector` resource is used to configure the operator and its managed components. A comprehensive documentation is [available here](https://github.com/netobserv/network-observability-operator/blob/1.10.0-community/docs/FlowCollector.md), and a full sample file [there](https://github.com/netobserv/network-observability-operator/blob/1.10.0-community/config/samples/flows_v1beta2_flowcollector.yaml).
+      The `FlowCollector` resource is used to configure the operator and its managed components. A comprehensive documentation is [available here](https://github.com/netobserv/network-observability-operator/blob/1.10.1-community/docs/FlowCollector.md), and a full sample file [there](https://github.com/netobserv/network-observability-operator/blob/1.10.1-community/config/samples/flows_v1beta2_flowcollector.yaml).
 
       To edit configuration in cluster, run:
 
@@ -3153,7 +3020,7 @@ properties:
 
       - Loki (`spec.loki`): configure here how to reach Loki. The default values match the Loki quick install paths mentioned above, but you might have to configure differently if you used another installation method. Make sure to disable it (`spec.loki.enable`) if you don't want to use Loki.
 
-      - Quick filters (`spec.consolePlugin.quickFilters`): configure preset filters to be displayed in the Console plugin. They offer a way to quickly switch from filters to others, such as showing / hiding pods network, or infrastructure network, or application network, etc. They can be tuned to reflect the different workloads running on your cluster. For a list of available filters, [check this page](https://github.com/netobserv/network-observability-operator/blob/1.10.0-community/docs/QuickFilters.md).
+      - Quick filters (`spec.consolePlugin.quickFilters`): configure preset filters to be displayed in the Console plugin. They offer a way to quickly switch from filters to others, such as showing / hiding pods network, or infrastructure network, or application network, etc. They can be tuned to reflect the different workloads running on your cluster. For a list of available filters, [check this page](https://github.com/netobserv/network-observability-operator/blob/1.10.1-community/docs/QuickFilters.md).
 
       - Kafka (`spec.deploymentModel: Kafka` and `spec.kafka`): when enabled, integrates the flow collection pipeline with Kafka, by splitting ingestion from transformation (kube enrichment, derived metrics, ...). Kafka can provide better scalability, resiliency and high availability ([view more details](https://www.redhat.com/en/topics/integration/what-is-apache-kafka)). Assumes Kafka is already deployed and a topic is created.
 
@@ -3189,7 +3056,7 @@ properties:
       This documentation includes:
 
       - An [overview](https://github.com/netobserv/network-observability-operator#openshift-console) of the features, with screenshots
-      - More information on [configuring metrics](https://github.com/netobserv/network-observability-operator/blob/1.10.0-community/docs/Metrics.md).
+      - More information on [configuring metrics](https://github.com/netobserv/network-observability-operator/blob/1.10.1-community/docs/Metrics.md).
       - A [performance](https://github.com/netobserv/network-observability-operator#performance-fine-tuning) section, for fine-tuning
       - A [security](https://github.com/netobserv/network-observability-operator#securing-data-and-communications) section
       - An [F.A.Q.](https://github.com/netobserv/network-observability-operator#faq--troubleshooting) section
@@ -3204,10 +3071,10 @@ properties:
     - supported: true
       type: AllNamespaces
     keywords:
-    - network observability
+    - netobserv
     - ebpf
     - ipfix
-    - flow tracing
+    - netflows
     - flows
     - topology
     - network
@@ -3248,16 +3115,18 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:35aa46ff07996aa94d4d16d51b405a8195e95ce47c7685de3070da1ca24470d4
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:9f789622354e55f64cbbd269d179998a856404ca3e1b7759ae2eaa8f3b367905
   name: console-plugin-compat
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:2ebccb783c1d2a482b9fe04d347a1c940c8b4b7735f096ecf0a82b6a6a750f7d
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:c686a79ce2e73a1806d2c5ee8ca0add24eb58f3374dfacfbab4d6f10476af365
   name: console-plugin
-- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:5036c9cb3725f70578d1ee603d5b1bc41176f00194b42cdb89e5978e0dd20400
+- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:bbbc03610ced1e53380f196b5db008d385c623e447126b47761d0daed3994395
   name: ebpf-agent
-- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:92b40517d7408f0d78bca5889ba5aa5055d8462e01d27c73e3e3a3062fa388fe
+- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:0e9c4b48389d0f55c9737a288ed93dc04430bbe62aeaf5eb60320eb8716876b1
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:fe153050ec689661d7533064733c46bfcd4f3437aa5424fb8f1debe647ca37d0
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:0be427f3936ef60341109aa8842aee85db1b58e32e2c5e350a7b71f3653e8a77
   name: ""
+- image: registry.redhat.io/openshift-logging/logging-loki-rhel9@sha256:6efd6e1fbc337c39a37cd52f1963ea61a33f0f9ab1220eeb5ecdd86b0ceb598f
+  name: demo-loki
 schema: olm.bundle
 ---
 image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:9ba226d0207edd7c9173333647353d3a7a0b5bfc32feb60ca5749dd6dc190c28
