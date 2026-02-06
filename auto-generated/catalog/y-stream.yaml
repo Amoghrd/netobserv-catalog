@@ -2512,6 +2512,11 @@ properties:
                 "slicesConfig": {
                   "enable": false
                 }
+              },
+              "prometheus": {
+                "querier": {
+                  "enable": true
+                }
               }
             }
           }
@@ -2520,7 +2525,7 @@ properties:
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
       containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:4d7149ef50ef73fe7c4338a39c042be27fb13dda062fba59ba5a4d3ef1a61b38
-      createdAt: 2026-02-05T19:24:19
+      createdAt: 2026-02-06T16:01:31
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -3117,13 +3122,13 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:daee042a1e445143fc382c390c1c12593a412578bc53b170d33c5d05a337a4f1
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:b3e4f9537ec3669037b4113947860a8438414c2d768fbf2c8af195f66d0c79c7
   name: console-plugin-compat
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:65566bd3a8d56b098192c3023f96baecc50855c4754d2989777b6ffe2a3ff795
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:3a0050666dacd9753f88d6440f2bd1b2f6eba21e07bbf923cb53663d8d51ef01
   name: console-plugin
 - image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:683e3c9dd4789382904ddad542bd482740fbbef3344d2a7c3a1d8c8f51304fe0
   name: ebpf-agent
-- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:a62a57881933892d5f4b76580032e72bcceca3a26ac1c3460fcc38c83f6e22d4
+- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:cac5f1d4a57918d6aac6f1936cd71a2f238b5e15e42d6bc43a133a62060f9dda
   name: flowlogs-pipeline
 - image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:4d7149ef50ef73fe7c4338a39c042be27fb13dda062fba59ba5a4d3ef1a61b38
   name: ""
