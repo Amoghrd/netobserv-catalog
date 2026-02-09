@@ -2473,8 +2473,8 @@ properties:
             "spec": {
               "agent": {
                 "ebpf": {
-                  "cacheActiveTimeout": "5s",
-                  "cacheMaxFlows": 100000,
+                  "cacheActiveTimeout": "15s",
+                  "cacheMaxFlows": 120000,
                   "excludeInterfaces": [
                     "lo"
                   ],
@@ -2525,7 +2525,7 @@ properties:
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
       containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:4d7149ef50ef73fe7c4338a39c042be27fb13dda062fba59ba5a4d3ef1a61b38
-      createdAt: 2026-02-06T16:01:31
+      createdAt: 2026-02-09T11:55:38
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -3122,7 +3122,7 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:b3e4f9537ec3669037b4113947860a8438414c2d768fbf2c8af195f66d0c79c7
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:d3fd4d9c196701254f471b9d6a792043f0d77ab34d86821b2d062f7f85e75687
   name: console-plugin-compat
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:3a0050666dacd9753f88d6440f2bd1b2f6eba21e07bbf923cb53663d8d51ef01
   name: console-plugin
