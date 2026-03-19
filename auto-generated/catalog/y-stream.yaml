@@ -3255,8 +3255,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:20c3702688d72863f78ddd68f9621e33774b9f8225bd3d1cf253e36a9ef8eabb
-      createdAt: 2026-02-18T16:17:07
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:dd9550e0abfd57d1ccd6f915410f96284d61a8093b12bafe2bb0bd6c88929ad6
+      createdAt: 2026-03-19T08:45:30
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -3276,7 +3276,7 @@ properties:
         "OpenShift Container Platform", "OpenShift Platform Plus"]'
       operators.operatorframework.io/builder: operator-sdk-v1.42.0
       operators.operatorframework.io/project_layout: go.kubebuilder.io/v4
-      repository: https://github.com/netobserv/network-observability-operator
+      repository: https://github.com/netobserv/netobserv-operator
       support: NetObserv team
     apiServiceDefinitions: {}
     crdDescriptions:
@@ -3579,6 +3579,10 @@ properties:
           path: consolePlugin.standalone
         - displayName: Unmanaged replicas
           path: consolePlugin.unmanagedReplicas
+        - displayName: Execution
+          path: execution
+        - displayName: Mode
+          path: execution.mode
         - displayName: Address
           path: kafka.address
         - displayName: Topic
@@ -3639,6 +3643,46 @@ properties:
           path: processor.metrics.includeList
         - displayName: Port
           path: processor.metrics.server.port
+        - displayName: Service
+          path: processor.service
+        - displayName: Provided certificates
+          path: processor.service.providedCertificates
+        - displayName: Ca file
+          path: processor.service.providedCertificates.caFile
+        - displayName: File
+          path: processor.service.providedCertificates.caFile.file
+        - displayName: Name
+          path: processor.service.providedCertificates.caFile.name
+        - displayName: Namespace
+          path: processor.service.providedCertificates.caFile.namespace
+        - displayName: Type
+          path: processor.service.providedCertificates.caFile.type
+        - displayName: Client cert
+          path: processor.service.providedCertificates.clientCert
+        - displayName: Cert file
+          path: processor.service.providedCertificates.clientCert.certFile
+        - displayName: Cert key
+          path: processor.service.providedCertificates.clientCert.certKey
+        - displayName: Name
+          path: processor.service.providedCertificates.clientCert.name
+        - displayName: Namespace
+          path: processor.service.providedCertificates.clientCert.namespace
+        - displayName: Type
+          path: processor.service.providedCertificates.clientCert.type
+        - displayName: Server cert
+          path: processor.service.providedCertificates.serverCert
+        - displayName: Cert file
+          path: processor.service.providedCertificates.serverCert.certFile
+        - displayName: Cert key
+          path: processor.service.providedCertificates.serverCert.certKey
+        - displayName: Name
+          path: processor.service.providedCertificates.serverCert.name
+        - displayName: Namespace
+          path: processor.service.providedCertificates.serverCert.namespace
+        - displayName: Type
+          path: processor.service.providedCertificates.serverCert.type
+        - displayName: Tls type
+          path: processor.service.tlsType
         - displayName: Slices config
           path: processor.slicesConfig
         - displayName: Collection mode
@@ -3694,7 +3738,7 @@ properties:
         version: v1alpha1
       - description: '`FlowMetric` is the schema for the custom metrics API, which
           allows to generate more metrics out of flow logs. You can find examples
-          here: https://github.com/netobserv/network-observability-operator/tree/main/config/samples/flowmetrics'
+          here: https://github.com/netobserv/netobserv-operator/tree/main/config/samples/flowmetrics'
         displayName: Flow Metric
         kind: FlowMetric
         name: flowmetrics.flows.netobserv.io
@@ -3744,7 +3788,7 @@ properties:
 
       ## Configuration
 
-      The `FlowCollector` resource is used to configure the operator and its managed components. A comprehensive documentation is [available here](https://github.com/netobserv/network-observability-operator/blob/1.11.0-community/docs/FlowCollector.md), and a full sample file [there](https://github.com/netobserv/network-observability-operator/blob/1.11.0-community/config/samples/flows_v1beta2_flowcollector.yaml).
+      The `FlowCollector` resource is used to configure the operator and its managed components. A comprehensive documentation is [available here](https://github.com/netobserv/netobserv-operator/blob/1.11.2-community/docs/FlowCollector.md), and a full sample file [there](https://github.com/netobserv/netobserv-operator/blob/1.11.2-community/config/samples/flows_v1beta2_flowcollector.yaml).
 
       To edit configuration in cluster, run:
 
@@ -3796,11 +3840,11 @@ properties:
 
       This documentation includes:
 
-      - An [overview](https://github.com/netobserv/network-observability-operator#openshift-console) of the features, with screenshots
-      - More information on [configuring metrics](https://github.com/netobserv/network-observability-operator/blob/1.11.0-community/docs/Metrics.md).
-      - A [performance](https://github.com/netobserv/network-observability-operator#performance-fine-tuning) section, for fine-tuning
-      - A [security](https://github.com/netobserv/network-observability-operator#securing-data-and-communications) section
-      - An [F.A.Q.](https://github.com/netobserv/network-observability-operator#faq--troubleshooting) section
+      - An [overview](https://github.com/netobserv/netobserv-operator#openshift-console) of the features, with screenshots
+      - More information on [configuring metrics](https://github.com/netobserv/netobserv-operator/blob/1.11.2-community/docs/Metrics.md).
+      - A [performance](https://github.com/netobserv/netobserv-operator#performance-fine-tuning) section, for fine-tuning
+      - A [security](https://github.com/netobserv/netobserv-operator#securing-data-and-communications) section
+      - An [F.A.Q.](https://github.com/netobserv/netobserv-operator#faq--troubleshooting) section
     displayName: Network Observability
     installModes:
     - supported: false
@@ -3828,11 +3872,11 @@ properties:
       operatorframework.io/os.linux: supported
     links:
     - name: Project page
-      url: https://github.com/netobserv/network-observability-operator
+      url: https://github.com/netobserv/netobserv-operator
     - name: Issue tracker
-      url: https://github.com/netobserv/network-observability-operator/issues
+      url: https://github.com/netobserv/netobserv-operator/issues
     - name: Discussion board
-      url: https://github.com/netobserv/network-observability-operator/discussions
+      url: https://github.com/netobserv/netobserv-operator/discussions
     maintainers:
     - email: jpinsonn@redhat.com
       name: Julien Pinsonneau
@@ -3856,15 +3900,15 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:7c568be98c077c7ac934b53f5fe18841244e4b05053a1a2c0dd7f826ac23c39a
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:95263792deed2149758f4248cf4368ac8b2f13a378e165d689f688ae518debc7
   name: console-plugin-compat
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:040644a426cdac266d364f0633942242915adc58688ec5122eec6bdc975eda00
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:9a08bb727395daa2d5a8823f66270dced15dd3d405ec33ec11dfec84d3e4c025
   name: console-plugin
-- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:5dce64786e69c2755d75fc5f95378c489ae06ac31c474f80a16ed3fb928bad50
+- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:8a6a3e1d749c5cbeafbfdfd74364b5bbf6c943899f0b9844fd6dd870d756c6b8
   name: ebpf-agent
-- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:a051ad13ec6b8cc15d26a77fbc92c81e7118546b149018b999995fd95fc227a1
+- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:7679882dfd7de011bac557740fcf509aafdd862767ea95377711d344e0430f40
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:20c3702688d72863f78ddd68f9621e33774b9f8225bd3d1cf253e36a9ef8eabb
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:dd9550e0abfd57d1ccd6f915410f96284d61a8093b12bafe2bb0bd6c88929ad6
   name: ""
 - image: registry.redhat.io/openshift-logging/logging-loki-rhel9@sha256:6efd6e1fbc337c39a37cd52f1963ea61a33f0f9ab1220eeb5ecdd86b0ceb598f
   name: demo-loki
