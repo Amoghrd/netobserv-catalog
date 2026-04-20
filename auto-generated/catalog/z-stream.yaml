@@ -3255,8 +3255,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:60fc1df8b39237a05240e89fa6f1e28ad2429fae2f6ea18ff7d87ccd5ab81b62
-      createdAt: 2026-03-25T09:58:40
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:43f4d031b1c34609476b6446f0ba2d97ae6f5b247404fa31b81846351c9e2cc0
+      createdAt: 2026-03-31T13:12:08
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -3860,11 +3860,11 @@ relatedImages:
   name: console-plugin-compat
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:f811d8319109fbf8c9ee6974246b00b60a7446ad8707eeb00407d4eaf78be852
   name: console-plugin
-- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:69904cef0fe037253e1a69638d620f88c9b0c5d398557cc92b232c4540a1d770
+- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:92b1a027006773ec8985bfd342e8f080c05a873a8dd39d9e43da89167fbe4b83
   name: ebpf-agent
 - image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:fd2e5c462e0c73276eecb851461d805fc22418fd0d53e804ffcdc8899f3b210b
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:60fc1df8b39237a05240e89fa6f1e28ad2429fae2f6ea18ff7d87ccd5ab81b62
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:43f4d031b1c34609476b6446f0ba2d97ae6f5b247404fa31b81846351c9e2cc0
   name: ""
 - image: registry.redhat.io/openshift-logging/logging-loki-rhel9@sha256:6efd6e1fbc337c39a37cd52f1963ea61a33f0f9ab1220eeb5ecdd86b0ceb598f
   name: demo-loki
