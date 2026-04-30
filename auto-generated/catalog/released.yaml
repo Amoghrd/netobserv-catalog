@@ -3854,8 +3854,6 @@ properties:
       name: Red Hat
       url: https://www.redhat.com
 relatedImages:
-- image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:325f2d9688ef540088f75b450d209fb8dd6b7b2dfc006f492f7575f3e8678607
-  name: ""
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-compat-rhel9@sha256:1a995a9846de0777528310382424f9be3b84f441f49d394038226f639a32a18e
   name: console-plugin-compat
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:f811d8319109fbf8c9ee6974246b00b60a7446ad8707eeb00407d4eaf78be852
@@ -3864,6 +3862,8 @@ relatedImages:
   name: ebpf-agent
 - image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:fd2e5c462e0c73276eecb851461d805fc22418fd0d53e804ffcdc8899f3b210b
   name: flowlogs-pipeline
+- image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:325f2d9688ef540088f75b450d209fb8dd6b7b2dfc006f492f7575f3e8678607
+  name: ""
 - image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:43f4d031b1c34609476b6446f0ba2d97ae6f5b247404fa31b81846351c9e2cc0
   name: ""
 - image: registry.redhat.io/openshift-logging/logging-loki-rhel9@sha256:6efd6e1fbc337c39a37cd52f1963ea61a33f0f9ab1220eeb5ecdd86b0ceb598f
