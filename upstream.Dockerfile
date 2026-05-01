@@ -1,4 +1,4 @@
-FROM quay.io/operator-framework/opm:v1.64.0
+FROM quay.io/operator-framework/opm:v1.67.0
 
 ARG COMMIT
 ARG INDEX_FILE=./auto-generated/catalog/y-stream.yaml
