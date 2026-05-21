@@ -4717,8 +4717,8 @@ properties:
       capabilities: Seamless Upgrades
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
-      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:d4b5b8d9c855504571dda8501a9ca5c00e8c7161f5970e3f8fa60f49a4caf8ba
-      createdAt: 2026-05-20T16:00:47
+      containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:f6f630f0e480247a8eaa8dc618d3a15998ea4798d584fb6228e37cf7cc7d2781
+      createdAt: 2026-05-21T13:03:35
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -5254,7 +5254,7 @@ properties:
 
       ## Configuration
 
-      The `FlowCollector` resource is used to configure the operator and its managed components. A comprehensive documentation is [available here](https://github.com/netobserv/netobserv-operator/blob/1.11.3-community/docs/FlowCollector.md), and a full sample file [there](https://github.com/netobserv/netobserv-operator/blob/1.11.3-community/config/samples/flows_v1beta2_flowcollector.yaml).
+      The `FlowCollector` resource is used to configure the operator and its managed components. A comprehensive documentation is [available here](https://github.com/netobserv/netobserv-operator/blob/1.11.4-community/docs/FlowCollector.md), and a full sample file [there](https://github.com/netobserv/netobserv-operator/blob/1.11.4-community/config/samples/flows_v1beta2_flowcollector.yaml).
 
       To edit configuration in cluster, run:
 
@@ -5307,7 +5307,7 @@ properties:
       This documentation includes:
 
       - An [overview](https://github.com/netobserv/netobserv-operator#openshift-console) of the features, with screenshots
-      - More information on [configuring metrics](https://github.com/netobserv/netobserv-operator/blob/1.11.3-community/docs/Metrics.md).
+      - More information on [configuring metrics](https://github.com/netobserv/netobserv-operator/blob/1.11.4-community/docs/Metrics.md).
       - A [performance](https://github.com/netobserv/netobserv-operator#performance-fine-tuning) section, for fine-tuning
       - A [security](https://github.com/netobserv/netobserv-operator#securing-data-and-communications) section
       - An [F.A.Q.](https://github.com/netobserv/netobserv-operator#faq--troubleshooting) section
@@ -5366,17 +5366,17 @@ properties:
 relatedImages:
 - image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream:latest
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-pf4-rhel9@sha256:13f6898aa45c540a552a5753f62ed1e9569daaa68d6665072d71dd124f03294d
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-pf4-rhel9@sha256:fda5085e6622f934fb7ba3f8dec8343408957424d33bbaccd9d982100f393545
   name: console-plugin-pf4
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-pf5-rhel9@sha256:5c44bc3ed7a883fce61f2512ae8b2e0f9fed6b2b955e3ddb9cde833c57167ef1
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-pf5-rhel9@sha256:60b6383c51dad1a0de31e515b748d81ae15bdd3c2295236dcdb59e94edacb7fb
   name: console-plugin-pf5
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:a0130f1a59dda1a8e2cde1203c82360594ef779a4acf39d4e21ac5d9782f93a3
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:b14d0682edb8dcbc57f87221f00f7a7249120b3ced2a0f879d805e3345dfd784
   name: console-plugin
-- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:1b3d44679daaaf68246a70903df0cdd7ecc1d720b755c0d40976dfe83d4de115
+- image: registry.redhat.io/network-observability/network-observability-ebpf-agent-rhel9@sha256:a98f0efde00a715362933c48029381972ec62221076c775c55b999cbc515702d
   name: ebpf-agent
-- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:4b4dccb2d149213869d3783dcf9b7e924f3fe439f7e01bd4e26134f869c6413b
+- image: registry.redhat.io/network-observability/network-observability-flowlogs-pipeline-rhel9@sha256:4d4923ee8b1656e4a324da2779a869d06f9a9db62e979071c132b6af654f859f
   name: flowlogs-pipeline
-- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:d4b5b8d9c855504571dda8501a9ca5c00e8c7161f5970e3f8fa60f49a4caf8ba
+- image: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:f6f630f0e480247a8eaa8dc618d3a15998ea4798d584fb6228e37cf7cc7d2781
   name: ""
 - image: registry.redhat.io/openshift-logging/logging-loki-rhel9@sha256:6efd6e1fbc337c39a37cd52f1963ea61a33f0f9ab1220eeb5ecdd86b0ceb598f
   name: demo-loki
