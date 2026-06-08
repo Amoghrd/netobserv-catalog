@@ -1,0 +1,26 @@
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: release-netobserv-1-12-0-1
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'jtakvori'
+spec:
+  releasePlan: netobserv-ystream
+  snapshot: netobserv-ystream-20260608-122906-000
+  data:
+    releaseNotes:
+      type: RHSA
+      cves:
+        - key: CVE-2026-29063
+          component: network-observability-console-plugin-pf4-ystream
+        - key: CVE-2026-42039
+          component: network-observability-console-plugin-pf4-ystream
+        - key: CVE-2026-6321
+          component: network-observability-console-plugin-ystream
+        - key: CVE-2026-42044
+          component: network-observability-console-plugin-pf4-ystream
+        - key: CVE-2026-42044
+          component: network-observability-console-plugin-ystream
+        - key: CVE-2026-32281
+          component: flowlogs-pipeline-ystream
