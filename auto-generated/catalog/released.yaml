@@ -4603,7 +4603,7 @@ relatedImages:
   name: demo-loki
 schema: olm.bundle
 ---
-image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:1ba4591961056c128b8f3513e9c5fff9b8d356a9abb30b61e6b0d2627bd173f0
+image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:3334ff41c9a32e1adab61a312fbfe23a993e9e66eb67ebaad1333916823a8311
 name: network-observability-operator.v1.12.0
 package: netobserv-operator
 properties:
@@ -4718,7 +4718,7 @@ properties:
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
       containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:d9b45fbf311547ad829a2606215c68bba77ca78badeba6fdac349aac46497d21
-      createdAt: 2026-06-04T07:44:31
+      createdAt: 2026-06-08T12:30:50
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -5364,11 +5364,11 @@ properties:
       name: Red Hat
       url: https://www.redhat.com
 relatedImages:
-- image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:1ba4591961056c128b8f3513e9c5fff9b8d356a9abb30b61e6b0d2627bd173f0
+- image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:3334ff41c9a32e1adab61a312fbfe23a993e9e66eb67ebaad1333916823a8311
   name: ""
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-pf4-rhel9@sha256:59dc2958f28649c9533e62589a3d56efe83ad67460e15c154cd1f2fbe0df5879
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-pf4-rhel9@sha256:09bfb6b895156f26ccf5bb6d782842bd427b34b3a4ee91806c61d6fc36ebbd06
   name: console-plugin-pf4
-- image: registry.redhat.io/network-observability/network-observability-console-plugin-pf5-rhel9@sha256:b0827e15e4dd4d6f437cfaa0270fb1cc766b83c8268813abe7949faaec621b4c
+- image: registry.redhat.io/network-observability/network-observability-console-plugin-pf5-rhel9@sha256:ba0fb7eca4c19c5edc10abdda24ec280eb758d25e7908a7bb480660edc6b8d7c
   name: console-plugin-pf5
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-rhel9@sha256:6b15e90d320eb422cd4d67847b525d4fe30acf4e69a6c55401f17fba31dcaf4c
   name: console-plugin
