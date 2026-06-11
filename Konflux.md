@@ -113,24 +113,6 @@ For new releases two differents directory are important :
 
 To be able to see release pipeline, a read access to the `rhtap-releng` namespace is required, this access must be requested in the konflux-user slack channel.
 
-### Branching
-
-After creating a new release branch, the following steps need to be done:
-- update the konflux components source branches (e.g. below for release-10).
-
-```bash
-oc patch components flowlogs-pipeline-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10'}]"
-oc patch components netobserv-ebpf-agent-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10'}]"
-oc patch components network-observability-cli-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10'}]"
-oc patch components network-observability-console-plugin-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10'}]"
-oc patch components network-observability-operator-bundle-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10'}]"
-oc patch components network-observability-operator-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10'}]"
-oc patch components network-observability-console-plugin-pf4-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10-pf4'}]"
-oc patch components network-observability-console-plugin-pf5-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10-pf5'}]"
-```
-
-- review the `ReleasePlanAdmission` objects to make sure they are targetting the next release.
-
 ## Release candidates
 
 To generate release candidates:
@@ -181,33 +163,36 @@ For the record, store the created Release in the `releases` directory of this re
 After a release, the following steps should be done:
 1. for y-stream releases only, prepare the next release branch: see [sync-scripts#create-new-release-branch](https://github.com/netobserv/sync-scripts#create-new-release-branch).
 2. bump the next z-stream version: see [sync-scripts#bump-next-z-stream](https://github.com/netobserv/sync-scripts#bump-next-z-stream).
-3. merge the nudging PRs that are generated after those changes
-4. update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
+3. update the konflux components for these branches (see section "Redirecting branches" below - you must be connected to the konflux CI cluster)
+4. merge the nudging PRs that are generated after those changes
+5. update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
   - updating the dependency graph (replace tags...) with the version just-released
-  - only after step 3. is complete AND the bundle on-push jobs succeeded, regenerate all catalogs
+  - only after step 4. is complete AND the bundle on-push jobs succeeded, regenerate all catalogs
+6. update the `ReleasePlanAdmission` objects in gitlab for next versions.
 
 ### Redirecting branches (after ystream release)
 
-After release, we need to repurpose zstream to the just released branch, and ystream to main.
-
 ```bash
-oc patch components flowlogs-pipeline-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'main'}]"
-oc patch components netobserv-ebpf-agent-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'main'}]"
-oc patch components network-observability-cli-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'main'}]"
-oc patch components network-observability-console-plugin-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'main'}]"
-oc patch components network-observability-operator-bundle-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'main'}]"
-oc patch components network-observability-operator-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'main'}]"
-oc patch components network-observability-console-plugin-pf4-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'main-pf4'}]"
-oc patch components network-observability-console-plugin-pf5-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'main-pf5'}]"
+y=release-2.1
+z=release-2.0
 
-oc patch components flowlogs-pipeline-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.9'}]"
-oc patch components netobserv-ebpf-agent-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.9'}]"
-oc patch components network-observability-cli-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.9'}]"
-oc patch components network-observability-console-plugin-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.9'}]"
-oc patch components network-observability-operator-bundle-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.9'}]"
-oc patch components network-observability-operator-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.9'}]"
-oc patch components network-observability-console-plugin-pf4-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.9-pf4'}]"
-oc patch components network-observability-console-plugin-pf5-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.9-pf5'}]"
+oc patch components flowlogs-pipeline-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$y'}]" -n ocp-network-observab-tenant
+oc patch components netobserv-ebpf-agent-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$y'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-cli-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$y'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-console-plugin-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$y'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-operator-bundle-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$y'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-operator-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$y'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-console-plugin-pf4-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$y-pf4'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-console-plugin-pf5-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$y-pf5'}]" -n ocp-network-observab-tenant
+
+oc patch components flowlogs-pipeline-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
+oc patch components netobserv-ebpf-agent-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-cli-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-console-plugin-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-operator-bundle-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-operator-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-console-pluin-pf4-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z-pf4'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-console-plugin-pf5-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z-pf5'}]" -n ocp-network-observab-tenant
 ```
 
 ### Freezing zstream
