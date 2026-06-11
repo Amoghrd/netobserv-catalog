@@ -129,17 +129,6 @@ oc patch components network-observability-console-plugin-pf4-ystream --type='jso
 oc patch components network-observability-console-plugin-pf5-ystream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': 'release-1.10-pf5'}]"
 ```
 
-- update main branches on every repo to disable on-push jobs:
-```yaml
-    pipelinesascode.tekton.dev/on-cel-expression: "false"
-```
-
-- update release branches on every repo to target self:
-```yaml
-    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "release-1.10"
-```
-(for both on-push and on-pull-request jobs)
-
 - review the `ReleasePlanAdmission` objects to make sure they are targetting the next release.
 
 ## Release candidates
@@ -190,11 +179,12 @@ For the record, store the created Release in the `releases` directory of this re
 ## After release
 
 After a release, the following steps should be done:
-1. bump / update all repos for next version: you can run [this script](https://github.com/netobserv/documents/blob/main/hack/prepare-next-version.sh) from each repo.
-2. merge the nudging PRs that are generated after those changes
-3. update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
+1. for y-stream releases only, prepare the next release branch: see [sync-scripts#create-new-release-branch](https://github.com/netobserv/sync-scripts#create-new-release-branch).
+2. bump the next z-stream version: see [sync-scripts#bump-next-z-stream](https://github.com/netobserv/sync-scripts#bump-next-z-stream).
+3. merge the nudging PRs that are generated after those changes
+4. update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
   - updating the dependency graph (replace tags...) with the version just-released
-  - only after step 2. is complete AND the bundle on-push jobs succeeded, regenerate all catalogs
+  - only after step 3. is complete AND the bundle on-push jobs succeeded, regenerate all catalogs
 
 ### Redirecting branches (after ystream release)
 
