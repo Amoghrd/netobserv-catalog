@@ -191,7 +191,7 @@ oc patch components network-observability-cli-zstream --type='json' -p "[{'op': 
 oc patch components network-observability-console-plugin-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
 oc patch components network-observability-operator-bundle-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
 oc patch components network-observability-operator-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z'}]" -n ocp-network-observab-tenant
-oc patch components network-observability-console-pluin-pf4-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z-pf4'}]" -n ocp-network-observab-tenant
+oc patch components network-observability-console-plugin-pf4-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z-pf4'}]" -n ocp-network-observab-tenant
 oc patch components network-observability-console-plugin-pf5-zstream --type='json' -p "[{'op': 'replace', 'path': '/spec/source/git/revision', 'value': '$z-pf5'}]" -n ocp-network-observab-tenant
 ```
 
