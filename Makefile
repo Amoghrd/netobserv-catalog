@@ -3,6 +3,13 @@ IMAGE ?= quay.io/$(USER)/network-observability-operator-catalog:latest
 BUILD_STREAM ?= y-stream
 OCI_BIN_PATH := $(shell which docker 2>/dev/null || which podman)
 OCI_BIN ?= $(shell basename ${OCI_BIN_PATH})
+ifneq (,$(shell which gsed 2>/dev/null))
+  SED_INPLACE := gsed -i
+else ifeq ($(shell uname -s),Darwin)
+  SED_INPLACE := sed -i ''
+else
+  SED_INPLACE := sed -i
+endif
 
 ##@ General
 
@@ -41,10 +48,10 @@ generate: prereqs ## Regenerate all catalogs from scratch
 			opm alpha render-template basic -o yaml ./templates/$$i > ./auto-generated/legacy-catalog/$$i; \
 			if [[ "$$i" == "released.yaml" ]]; then \
 				echo "Sedding $$i" ; \
-				sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/released.yaml ; \
-				sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/released.yaml ; \
-				sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/released.yaml ; \
-				sed -i -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/released.yaml ; \
+				$(SED_INPLACE) -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/released.yaml ; \
+				$(SED_INPLACE) -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/released.yaml ; \
+				$(SED_INPLACE) -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/catalog/released.yaml ; \
+				$(SED_INPLACE) -e 's#quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-ystream#registry.redhat.io/network-observability/network-observability-operator-bundle#g' ./auto-generated/legacy-catalog/released.yaml ; \
 			fi \
 		fi \
 	done
@@ -64,8 +71,8 @@ ifeq (,${BUNDLE_SHA})
 else
 	cp ./templates/y-stream.Dockerfile-args ./templates/next-release.Dockerfile-args
 	cp ./templates/y-stream.yaml ./templates/released.yaml
-	sed -i 's/bundle-ystream:latest/bundle-ystream@sha256:$(BUNDLE_SHA)/' ./templates/released.yaml
-	sed -i 's/zstream/ystream/' .tekton/images-mirror-set.yaml
+	$(SED_INPLACE) 's/bundle-ystream:latest/bundle-ystream@sha256:$(BUNDLE_SHA)/' ./templates/released.yaml
+	$(SED_INPLACE) 's/zstream/ystream/' .tekton/images-mirror-set.yaml
 	SKIP="y-stream.yaml,z-stream.yaml" $(MAKE) generate
 endif
 
@@ -76,8 +83,8 @@ ifeq (,${BUNDLE_SHA})
 else
 	cp ./templates/z-stream.Dockerfile-args ./templates/next-release.Dockerfile-args
 	cp ./templates/z-stream.yaml ./templates/released.yaml
-	sed -i 's/bundle-zstream:latest/bundle-zstream@sha256:$(BUNDLE_SHA)/' ./templates/released.yaml
-	sed -i 's/ystream/zstream/' .tekton/images-mirror-set.yaml
+	$(SED_INPLACE) 's/bundle-zstream:latest/bundle-zstream@sha256:$(BUNDLE_SHA)/' ./templates/released.yaml
+	$(SED_INPLACE) 's/ystream/zstream/' .tekton/images-mirror-set.yaml
 	SKIP="y-stream.yaml,z-stream.yaml" $(MAKE) generate
 endif
 

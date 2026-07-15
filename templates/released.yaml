@@ -120,4 +120,4 @@ entries:
   - schema: olm.bundle          # 1.12.0
     image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:3334ff41c9a32e1adab61a312fbfe23a993e9e66eb67ebaad1333916823a8311
   - schema: olm.bundle          # 1.12.1
-    image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream@sha256:7a08f9c9bdeb2cf98fce3420276e9ab5d7f91b909afee6f80d53b0de6fc0bbc4
+    image: quay.io/redhat-user-workloads/ocp-network-observab-tenant/network-observability-operator-bundle-zstream@sha256:f01c9e0b7ed93cd5f95dd99dc406975ed8f6490218c3677acb61e2c1f7d370bf
