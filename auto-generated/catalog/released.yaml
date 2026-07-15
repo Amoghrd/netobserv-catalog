@@ -5384,7 +5384,7 @@ relatedImages:
   name: demo-loki
 schema: olm.bundle
 ---
-image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:7a08f9c9bdeb2cf98fce3420276e9ab5d7f91b909afee6f80d53b0de6fc0bbc4
+image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:f01c9e0b7ed93cd5f95dd99dc406975ed8f6490218c3677acb61e2c1f7d370bf
 name: network-observability-operator.v1.12.1
 package: netobserv-operator
 properties:
@@ -5499,7 +5499,7 @@ properties:
       categories: Monitoring, Networking, Observability, OpenShift Optional
       console.openshift.io/plugins: '["netobserv-plugin"]'
       containerImage: registry.redhat.io/network-observability/network-observability-rhel9-operator@sha256:0512c237705195a557831dfa73d36c698a15a23b1fdc6cca56eec9eadb293226
-      createdAt: 2026-06-26T17:44:21
+      createdAt: 2026-07-15T15:26:10
       description: Network flows collector and monitoring solution
       features.operators.openshift.io/cnf: "false"
       features.operators.openshift.io/cni: "false"
@@ -6145,7 +6145,7 @@ properties:
       name: Red Hat
       url: https://www.redhat.com
 relatedImages:
-- image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:7a08f9c9bdeb2cf98fce3420276e9ab5d7f91b909afee6f80d53b0de6fc0bbc4
+- image: registry.redhat.io/network-observability/network-observability-operator-bundle@sha256:f01c9e0b7ed93cd5f95dd99dc406975ed8f6490218c3677acb61e2c1f7d370bf
   name: ""
 - image: registry.redhat.io/network-observability/network-observability-console-plugin-pf4-rhel9@sha256:893c5bc99eac5e2400d3fc0382537cca7dcb6281fefab0536a276736f2b55185
   name: console-plugin-pf4
