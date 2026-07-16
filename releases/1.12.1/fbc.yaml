@@ -1,0 +1,155 @@
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-12-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-12
+  snapshot: catalog-4-12-20260715-190013-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-13-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-13
+  snapshot: catalog-4-13-20260715-184842-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-14-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-14
+  snapshot: catalog-4-14-20260715-184858-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-15-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-15
+  snapshot: catalog-4-15-20260715-185819-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-16-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-16
+  snapshot: catalog-4-16-20260715-184848-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-17-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-17
+  snapshot: catalog-4-17-20260715-185136-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-18-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-18
+  snapshot: catalog-4-18-20260715-185059-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-19-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-19
+  snapshot: catalog-4-19-20260715-184932-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-20-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-20
+  snapshot: catalog-4-20-20260715-184844-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-21-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-21
+  snapshot: catalog-4-21-20260715-184828-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-22-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-22
+  snapshot: catalog-4-22-20260715-184951-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-4-23-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v4-23
+  snapshot: catalog-4-23-20260715-185113-000
+---
+# Done
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: netobserv-1-12-1-fbc-5-0-3
+  namespace: ocp-network-observab-tenant
+  labels:
+    release.appstudio.openshift.io/author: 'aramesha'
+spec:
+  releasePlan: netobserv-fbc-v5-0
+  snapshot: catalog-5-0-20260715-185100-000
