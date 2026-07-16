@@ -166,7 +166,11 @@ After a release, the following steps should be done:
 3. update the konflux components for these branches (see section "Redirecting branches" below - you must be connected to the konflux CI cluster)
 4. merge the nudging PRs that are generated after those changes
 5. update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
-  - updating the dependency graph (replace tags...) with the version just-released
+  - update the dependency graph for the next version. For example, after releasing 1.12.1 and bumping repos to 1.12.2:
+    - in `templates/z-stream.yaml`: add `v1.12.2 replaces v1.12.1` to the stable channel entries, pin the 1.12.1 bundle image to its released SHA (from `released.yaml`), and add a new `# 1.12.2` bundle entry pointing to `...bundle-zstream:latest`
+    - update `templates/z-stream.Dockerfile-args` to `BUILDVERSION=1.12.2`
+    - in `templates/y-stream.yaml`: update the `replaces` for the current y-stream entry to point to the just-released version (e.g. `v2.0.0 replaces v1.12.1` instead of `v1.12.0`), and add the released version's channel entry and bundle image with its SHA
+    - for y-stream releases, also apply the same z-stream pattern to `y-stream.yaml` and `y-stream.Dockerfile-args`
   - only after step 4. is complete AND the bundle on-push jobs succeeded, regenerate all catalogs
 6. update the `ReleasePlanAdmission` objects in gitlab for next versions.
 
