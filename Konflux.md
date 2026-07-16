@@ -157,14 +157,14 @@ For the record, commit the created Release in this repo after it's successful.
 ## After release
 
 After a release, the following steps should be done:
-1. for y-stream releases only, prepare the next release branch: see [sync-scripts#create-new-release-branch](https://github.com/netobserv/sync-scripts#create-new-release-branch).
-2. bump the next z-stream version: see [sync-scripts#bump-next-z-stream](https://github.com/netobserv/sync-scripts#bump-next-z-stream).
-3. update the konflux components for these branches (see section "Redirecting branches" below - you must be connected to the konflux CI cluster)
-4. merge the nudging PRs that are generated after those changes
-5. update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
+1. [**y-stream release**] prepare the next release branch: see [sync-scripts#create-new-release-branch](https://github.com/netobserv/sync-scripts#create-new-release-branch).
+2. [**any release**] bump the next z-stream version: see [sync-scripts#bump-next-z-stream](https://github.com/netobserv/sync-scripts#bump-next-z-stream).
+3. [**y-stream release**] update the konflux components for these branches (see section "Redirecting branches" below - you must be connected to the konflux CI cluster)
+4. [**any release**] wait for the nudging PRs generated after those changes to appear and be merged automatically
+5. [**any release**] update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
   - updating the dependency graph (replace tags...) with the version just-released
   - only after step 4. is complete AND the bundle on-push jobs succeeded, regenerate all catalogs
-6. update the `ReleasePlanAdmission` objects in gitlab for next versions.
+6. [**any release**] update the `ReleasePlanAdmission` objects in gitlab for next versions.
 
 ### Redirecting branches (after ystream release)
 
