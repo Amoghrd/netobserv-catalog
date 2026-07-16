@@ -150,7 +150,7 @@ Once it is ready to be released, new `Release` objects need to be created to tri
 - the snapshot to release under `snapshot` - check in konflux dashboard what's the latest snapshot that was generated after the last successful bundle build (or FBC)
 - list of CVEs
 
-It must be created on the OCP instance that runs Konflux (ask for the address if you don't have it).
+They must be created on the OCP instance that runs Konflux (ask for the address if you don't have it - or find it in the [release checklist](https://docs.google.com/spreadsheets/d/1hQiqEKYBZ75obA6qOmaY-L3uMAiVSIOeVbpZJIkvwiY/edit?gid=583594058#gid=583594058)). Apply `netobserv.yaml` first, and monitor the release from the Konflux dashboard. When it succeeds, proceed with `fbc.yaml`. The Release Monitor view is very convenient to see all FBC releases at once.
 
 For the record, commit the created Release in this repo after it's successful.
 
