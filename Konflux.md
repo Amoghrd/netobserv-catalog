@@ -164,7 +164,7 @@ After a release, the following steps should be done:
 5. [**any release**] update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
   - updating the dependency graph (replace tags...) with the version just-released
   - only after step 4. is complete AND the bundle on-push jobs succeeded, regenerate all catalogs
-6. [**any release**] update the `ReleasePlanAdmission` objects in gitlab for next versions.
+6. [**any release**] update the `ReleasePlanAdmission` objects in gitlab for next versions. See [merge request example](https://gitlab.cee.redhat.com/releng/konflux-release-data/-/merge_requests/20432)
 
 ### Redirecting branches (after ystream release)
 
