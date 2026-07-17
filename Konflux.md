@@ -102,6 +102,10 @@ spec:
   sourceType: grpc
 ```
 
+## Release checklist
+
+Refer to the [release checklist](https://docs.google.com/spreadsheets/d/1hQiqEKYBZ75obA6qOmaY-L3uMAiVSIOeVbpZJIkvwiY/edit?gid=583594058#gid=583594058) as the main entry point for the process.
+
 ## Release pipeline setup
 
 [Konflux release configuration](https://gitlab.cee.redhat.com/releng/konflux-release-data) define the release process for konflux built projects.
@@ -139,36 +143,28 @@ When a release candidate is accepted and ready to be released, the catalogs repo
 BUNDLE_SHA=(desired bundle SHA) make final-ystream # (or zstream)
 ```
 
-Once it is ready to be released, a new `Release` object needs to be created to trigger the production release pipeline:
+Once it is ready to be released, new `Release` objects need to be created to trigger the production release pipeline. Copy/paste [the last release directory](https://github.com/netobserv/netobserv-catalog/tree/main/releases) for the new version, and edit `netobserv.yaml` and `fbc.yaml` with:
 
-```yaml
-apiVersion: appstudio.redhat.com/v1alpha1
-kind: Release
-metadata:
-  name: release-netobserv-1-8-0-0                      # name+version - last digit is the attempt number, in case you need to retry
-  namespace: ocp-network-observab-tenant
-  labels:
-    release.appstudio.openshift.io/author: 'jtakvori'  # your konflux / redhat user
-spec:
-  releasePlan: netobserv-1-8
-  snapshot: netobserv-operator-1-8-9ms9w               # the validated snapshot
-```
+- updated `name`, e.g. `release-netobserv-1-12-0-0`; last digit is the attempt number, in case you need to retry
+- your konflux / redhat user under `release.appstudio.openshift.io/author` label
+- the snapshot to release under `snapshot` - check in konflux dashboard what's the latest snapshot that was generated after the last successful bundle build (or FBC)
+- list of CVEs
 
-It must be created on the OCP instance that runs Konflux (ask for the address if you don't have it).
+They must be created on the OCP instance that runs Konflux (ask for the address if you don't have it - or find it in the [release checklist](https://docs.google.com/spreadsheets/d/1hQiqEKYBZ75obA6qOmaY-L3uMAiVSIOeVbpZJIkvwiY/edit?gid=583594058#gid=583594058)). Apply `netobserv.yaml` first, and monitor the release from the Konflux dashboard. When it succeeds, proceed with `fbc.yaml`. The Release Monitor view is very convenient to see all FBC releases at once.
 
-For the record, store the created Release in the `releases` directory of this repo.
+For the record, commit the created Release in this repo after it's successful.
 
 ## After release
 
 After a release, the following steps should be done:
-1. for y-stream releases only, prepare the next release branch: see [sync-scripts#create-new-release-branch](https://github.com/netobserv/sync-scripts#create-new-release-branch).
-2. bump the next z-stream version: see [sync-scripts#bump-next-z-stream](https://github.com/netobserv/sync-scripts#bump-next-z-stream).
-3. update the konflux components for these branches (see section "Redirecting branches" below - you must be connected to the konflux CI cluster)
-4. merge the nudging PRs that are generated after those changes
-5. update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
+1. [**y-stream release**] prepare the next release branch: see [sync-scripts#create-new-release-branch](https://github.com/netobserv/sync-scripts#create-new-release-branch).
+2. [**any release**] bump the next z-stream version: see [sync-scripts#bump-next-z-stream](https://github.com/netobserv/sync-scripts#bump-next-z-stream).
+3. [**y-stream release**] update the konflux components for these branches (see section "Redirecting branches" below - you must be connected to the konflux CI cluster)
+4. [**any release**] wait for the nudging PRs generated after those changes to appear and be merged automatically
+5. [**any release**] update ystream and zstream in [netobserv-catalog](https://github.com/netobserv/netobserv-catalog):
   - updating the dependency graph (replace tags...) with the version just-released
   - only after step 4. is complete AND the bundle on-push jobs succeeded, regenerate all catalogs
-6. update the `ReleasePlanAdmission` objects in gitlab for next versions.
+6. [**any release**] update the `ReleasePlanAdmission` objects in gitlab for next versions. See [merge request example](https://gitlab.cee.redhat.com/releng/konflux-release-data/-/merge_requests/20432)
 
 ### Redirecting branches (after ystream release)
 
